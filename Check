@@ -1,0 +1,54 @@
+public boolean CheckValidez(int[] Revisar) {
+		boolean valido = true;
+		for(int i=0;i<=3;i++) {
+			for(int j=0;j<=3;j++) {
+				if(i!=j) {
+					if(Revisar[i] == Revisar[j])
+						valido= false;
+				}
+			}
+		}
+		if(valido = false)
+			JOptionPane.showMessageDialog(null, "Algún numero está repetido, vuelva a intentarlo");
+		return valido;
+	}
+	
+	public boolean RevisarIntento(int[] Adivinado, int[] NumeroSecreto) {
+		intentos++;
+		int errores = 4;
+		int aciertos = 0;
+		int cercanos = 0;
+		
+		for(int i=0;i<=3;i++)
+			if(Adivinado[i]==NumeroSecreto[i]) {
+				aciertos++;
+				errores--;
+			}
+		if(Adivinado[0] == NumeroSecreto[1]||Adivinado[0] == NumeroSecreto[2]||Adivinado[0] == NumeroSecreto[3]) {
+			cercanos++;
+			errores--;
+		}
+		if(Adivinado[1] == NumeroSecreto[0]||Adivinado[1] == NumeroSecreto[2]||Adivinado[1] == NumeroSecreto[3]) {
+			cercanos++;
+			errores--;
+		}
+		if(Adivinado[2] == NumeroSecreto[0]||Adivinado[2] == NumeroSecreto[1]||Adivinado[2] == NumeroSecreto[3]) {
+			cercanos++;
+			errores--;
+		}
+		if(Adivinado[3] == NumeroSecreto[0]||Adivinado[3] == NumeroSecreto[1]||Adivinado[3] == NumeroSecreto[2]) {
+			cercanos++;
+			errores--;
+		}
+		MostrarResultados(aciertos, cercanos, errores);
+		if(aciertos == 4)
+			return true;
+		else
+			return false;	
+	}
+	
+	public void MostrarResultados(int aciertos, int cercanos, int errores) {
+		JOptionPane.showMessageDialog(null, "intento #"+intentos+"\nDígitos Acertados: "+aciertos
+				+"\nDígitos Cercanos: "+cercanos+"\nDígitos Errados: "+errores);
+	}
+}
