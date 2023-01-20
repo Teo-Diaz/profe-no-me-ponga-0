@@ -1,0 +1,41 @@
+import javax.swing.JOptionPane;
+
+public class Adivinador extends Player {
+	int intentos = 0;
+	
+	public void IntentarAdivinar(Player1 player1) {
+		boolean valido = false;
+		boolean victory = false;
+		JOptionPane.showMessageDialog(null, "Bienvenido a punto y fama "+this.nombre+"\nA continuación "
+				+ " deberá adivinar 4 numeros que " + player1.nombre+ " ingresó."
+				+ "\nRecuerde que no se pueden repetir numeros.");
+		while(victory = false) {
+			while(valido == false) {
+				for(int i=0;i<4;i++)
+					this.ArregloNum[i] = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el numero #"+(i+1)+": "));
+				valido=chequeoDeValidez.CheckValidez(this.ArregloNum);
+			}
+			victory = chequeoDeValidez.RevisarIntento(this.ArregloNum, player1.ArregloNum);
+			intentos++;
+		}
+		MostrarVictoria(player1.ArregloNum);
+	}
+	
+	public void MostrarVictoria(int[] NumeroSecreto) {
+		String ranking;
+		if(intentos<6)
+			ranking="Master";
+		else if(intentos>=6&&intentos<11)
+			ranking="Senior";
+		else if(intentos>=11&&intentos<16)
+			ranking="Semi-Senior";
+		else if(intentos>=16&&intentos<20)
+			ranking="Junior";
+		else
+			ranking="Aprendiz";
+		
+		JOptionPane.showMessageDialog(null, "Felicidades "+this.nombre+"\nUsted ha adivinado el número secreto "
+				+NumeroSecreto[0]+NumeroSecreto[1]+NumeroSecreto[2]+NumeroSecreto[3]+
+				"en "+intentos+" intentos. \nSu ranking es "+ranking);
+	}
+}
